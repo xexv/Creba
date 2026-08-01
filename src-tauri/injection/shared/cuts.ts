@@ -17,8 +17,12 @@ li:has(a[href="/shop"]),
 li:has(a[href="/quest-home"]) { display: none !important; }
 
 /* ===== Квест-бар (снизу слева) и плитки наград ===== */
+/* Корень свёрнутого/развёрнутого квест-бара — mask прямо в секции панелей аккаунта.
+   Убирает и пустую полоску-контейнер, что остаётся при активном квесте. */
+section[class*="panels_"] > [class*="mask_"],
 [class*="questProgressWrapper"],
 [class*="questProgressCopy"],
+[class*="questProgressHint"],
 [class*="questRewardTile"],
 [class*="questAcceptedContent"],
 [class*="questAcceptedHeader"] { display: none !important; }
