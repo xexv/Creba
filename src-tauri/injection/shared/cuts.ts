@@ -27,13 +27,15 @@ section[class*="panels_"] > [class*="mask_"],
 [class*="questAcceptedContent"],
 [class*="questAcceptedHeader"] { display: none !important; }
 
-/* ===== Косметика: декорации аватаров / эффекты и баннеры профиля / nameplates / кланы ===== */
+/* ===== Косметика: декорации аватаров / эффекты и баннеры профиля / кланы =====
+   ВНИМАНИЕ: НЕ скрывать [class*="nameplate"] — у строк участников с nameplate
+   к контейнеру строки добавляется этот класс, и display:none убирает самого
+   участника из списка. Nameplate оставляем видимым. */
 [class*="avatarDecoration"],
 [class*="profileEffects"],
 [class*="profileEffect"],
 [class*="banner_"],
 [class*="bannerButton"],
-[class*="nameplate"],
 [class*="clanTag"],
 [class*="collectible"] { display: none !important; }
 
