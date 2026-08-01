@@ -1,8 +1,12 @@
 import { applyExtraCSS } from './shared/ui'
+import { applyCrebaCuts } from './shared/cuts'
 import { initWindowsKeybinds } from './shared/windows_keybinds'
 
 (async () => {
   console.log('Discord is loaded!')
+
+  // Creba: скрыть вырезанный UI-хлам как можно раньше
+  applyCrebaCuts()
 
   // Ensure top bar exists if we want it
   if (window.__DORION_CONFIG__.use_native_titlebar)

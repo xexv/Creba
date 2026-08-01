@@ -15,5 +15,32 @@
         "sub_frame"
       ]
     }
+  },
+  {
+    "id": 2,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "/api/v\\d+/(science|track|metrics|premium-marketing)",
+      "resourceTypes": ["xmlhttprequest", "ping", "other"]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "sentry\\.io|/error-reporting|crash[-_]report",
+      "resourceTypes": ["xmlhttprequest", "ping", "other", "script"]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 2,
+    "action": { "type": "block" },
+    "condition": {
+      "regexFilter": "avatar-decoration-presets|/profile_effects/|/clan-badges/|/collectibles/",
+      "resourceTypes": ["image", "media", "xmlhttprequest"]
+    }
   }
 ]
