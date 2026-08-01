@@ -45,11 +45,8 @@ jobs:
           - platform: macos-13            # Intel (x86_64)
             args: '--target x86_64-apple-darwin'
             rust-target: 'x86_64-apple-darwin'
-          # Linux
+          # Linux (только x86_64 — сборка AppImage под ARM нестабильна)
           - platform: ubuntu-22.04        # x86_64
-            args: ''
-            rust-target: ''
-          - platform: ubuntu-22.04-arm    # aarch64
             args: ''
             rust-target: ''
 
