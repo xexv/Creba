@@ -432,6 +432,10 @@ fn main() {
       configure(&win);
       setup_autostart(app);
 
+      // Creba: прячем плашку-индикатор захвата экрана (WebView2/Chromium)
+      #[cfg(target_os = "windows")]
+      functionality::screenshare::start_hider();
+
       Ok(())
     })
     .build(context)

@@ -16,5 +16,8 @@ pub mod menu;
 #[cfg(not(target_os = "macos"))]
 pub mod rpc;
 
+#[cfg(target_os = "windows")]
+pub mod screenshare;
+
 pub mod tray;
 pub mod window;
