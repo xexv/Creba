@@ -1,60 +1,49 @@
 /**
  * Creba UI cuts — скрытие «мусорных» элементов интерфейса Discord.
  *
- * ВАЖНО: селекторы опираются на префиксы классов Discord ([class*="name"]),
- * т.к. полные имена классов захешированы и меняются при апдейтах. Префикс
- * (семантическая часть) обычно стабилен и не зависит от языка клиента.
- * Часть селекторов может потребовать подстройки под текущую версию Discord —
- * тюнить лучше через devtools на живом клиенте.
+ * Селекторы ПРОВЕРЕНЫ вживую через CDP на реальном клиенте:
+ *  - навигационные пункты (Nitro/Shop/Quests) — по стабильному href;
+ *  - квест-бар/косметика — по префиксам классов ([class*="name"]),
+ *    т.к. полные имена захешированы (questProgressWrapper_ae7810 и т.п.),
+ *    но семантический префикс стабилен и не зависит от языка клиента.
  *
- * Это визуальное скрытие (не грузит меньше по сети — за это отвечает
- * блок-лист в extension/dnr-rules.json). Реально не рендерить компоненты
- * можно только webpack-патчами (следующий этап).
+ * Это визуальное скрытие. Реальная разгрузка по сети (телеметрия, ассеты
+ * декораций) — в extension/dnr-rules.json.
  */
 const CREBA_CUTS_CSS = `
-/* ===== Nitro / Shop / подарки ===== */
-a[href="/store"],
-a[href="/shop"],
-a[href^="/nitro"],
-[class*="premiumButton"],
-[class*="premiumUpsell"],
-[class*="nitroButton"],
-[class*="buttonMenu"] [class*="gift"],
-[class*="premiumPromo"] { display: none !important; }
+/* ===== Сайдбар: Nitro / Shop / Quests (стабильно по href) ===== */
+li:has(a[href="/store"]),
+li:has(a[href="/shop"]),
+li:has(a[href="/quest-home"]) { display: none !important; }
 
-/* ===== Boost-UI ===== */
-[class*="premiumGuild"],
-[class*="boostButton"],
-[class*="guildBoost"] { display: none !important; }
+/* ===== Квест-бар (снизу слева) и плитки наград ===== */
+[class*="questProgressWrapper"],
+[class*="questProgressCopy"],
+[class*="questRewardTile"],
+[class*="questAcceptedContent"],
+[class*="questAcceptedHeader"] { display: none !important; }
 
-/* ===== Quests ===== */
-[class*="questsButton"],
-[class*="questBadge"],
-[class*="quests_"],
-[class*="questsContainer"] { display: none !important; }
-
-/* ===== Server Discovery / Activities ===== */
-a[href="/guild-discovery"],
-a[href="/discovery"],
-[class*="discoverButton"],
-[class*="activityLaunch"],
-[class*="quickSwitcherActivit"] { display: none !important; }
-
-/* ===== Soundboard / GIF-пикер (Tenor) ===== */
-[class*="soundboard"],
-[class*="expressionPickerButton"][aria-controls*="gif"] { display: none !important; }
-
-/* ===== Косметика: декорации / profile effects / nameplates / коллекционки ===== */
+/* ===== Косметика: декорации аватаров / эффекты и баннеры профиля / nameplates / кланы ===== */
 [class*="avatarDecoration"],
 [class*="profileEffects"],
-[class*="profileEffect_"],
+[class*="profileEffect"],
+[class*="banner_"],
+[class*="bannerButton"],
 [class*="nameplate"],
-[class*="collectibles"],
-[class*="clanTag"] { display: none !important; }
+[class*="clanTag"],
+[class*="collectible"] { display: none !important; }
 
-/* ===== Промо-попапы / «что нового» ===== */
-[class*="whatsNew"],
-[class*="premiumTrialButton"],
+/* ===== Коммерция: кнопка подарка в поле ввода ===== */
+button[aria-label="Give a Gift"],
+button[aria-label="Подарить"],
+button[aria-label*="gift" i] { display: none !important; }
+
+/* ===== Промо / буст ===== */
+[class*="premiumUpsell"],
+[class*="premiumButton"],
+[class*="nitroButton"],
+[class*="boostButton"],
+[class*="guildBoost"],
 [class*="upsellBanner"] { display: none !important; }
 `
 
