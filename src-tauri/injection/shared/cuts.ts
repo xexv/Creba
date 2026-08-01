@@ -113,9 +113,17 @@ export function applyCrebaCuts() {
 function hideWishlistTab() {
   const NEEDLE = /^(wishlist|список желаемого)$/i
   const hide = () => {
+    // Вкладка Wishlist в полной карточке профиля
     document.querySelectorAll('[class*="tabBarItem"]').forEach((el) => {
       if (NEEDLE.test((el.textContent || '').trim())) {
         (el as HTMLElement).style.setProperty('display', 'none', 'important')
+      }
+    })
+    // Секция Wishlist в боковой панели профиля (заголовок -> вся секция)
+    document.querySelectorAll('h1, h2, h3, [class*="header_"]').forEach((h) => {
+      if (NEEDLE.test((h.textContent || '').trim())) {
+        const section = h.closest('section') || h.closest('[class*="container_"]')
+        if (section) (section as HTMLElement).style.setProperty('display', 'none', 'important')
       }
     })
   }
