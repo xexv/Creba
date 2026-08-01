@@ -82,7 +82,7 @@ jobs:
         if: startsWith(matrix.platform, 'ubuntu')
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libglib2.0-dev
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libglib2.0-dev libgtk-3-dev cmake
 
       - name: Install frontend dependencies
         run: pnpm install
@@ -90,6 +90,14 @@ jobs:
       # Shelter-инжектор скачивается отдельно (в репозиторий не входит)
       - name: Fetch shelter injector
         run: pnpm shupdate
+
+      # WebKitGTK-расширение (libextension.so) собирается через cmake, только Linux
+      - name: Build WebKitGTK extension (Linux)
+        if: startsWith(matrix.platform, 'ubuntu')
+        run: |
+          cd src-tauri/extension_webkit
+          cmake .
+          cmake --build .
 
       # Проставляем введённую версию в конфиги перед сборкой
       - name: Set version
