@@ -86,6 +86,24 @@ button[aria-label*="gift" i] { display: none !important; }
 [class*="boostButton"],
 [class*="guildBoost"],
 [class*="upsellBanner"] { display: none !important; }
+
+/* ===== Балласт: GIF-пикер / Apps(Activities) / Soundboard / Discovery / What's New ===== */
+button[aria-label="Open GIF picker"],
+button[aria-label*="GIF" i],
+button[aria-label="Apps"],
+[class*="soundboard"],
+a[href="/guild-discovery"],
+[data-list-item-id*="discovery"],
+[class*="whatsNew"],
+[class*="premiumTrial"] { display: none !important; }
+
+/* ===== Производительность: почти отключить анимации/переходы (разгрузка GPU на idle) ===== */
+*, *::before, *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+}
 `
 
 /**
@@ -111,7 +129,7 @@ export function applyCrebaCuts() {
  * т.к. вкладки появляются только при открытии профиля.
  */
 function hideWishlistTab() {
-  const NEEDLE = /^(wishlist|список желаемого)$/i
+  const NEEDLE = /^(wishlist|список желаемого|game collection|коллекция игр)$/i
   const hide = () => {
     // Вкладка Wishlist в полной карточке профиля
     document.querySelectorAll('[class*="tabBarItem"]').forEach((el) => {
