@@ -39,10 +39,21 @@ section[class*="panels_"] > [class*="mask_"],
 [class*="clanTag"],
 [class*="collectible"] { display: none !important; }
 
+/* Profile frame (новая «рамка» вокруг карточки профиля) — углы рамки */
+[class*="bordersTopLeft"],
+[class*="bordersTopRight"],
+[class*="bordersBottomLeft"],
+[class*="bordersBottomRight"],
+[class*="bordersBottom"],
+[class*="bordersTop"] { display: none !important; }
+
 /* Nameplate: скрываем ТОЛЬКО арт-подложку строки участника, а не саму строку.
    Строка = .childContainer.nameplated > [container_* (арт) + memberInner_* (участник)].
    Прячем арт-слой (container_), участник (memberInner_) остаётся видимым. */
 [class*="nameplated"] > [class*="container_"] { display: none !important; }
+
+/* Nameplate на панели своего аккаунта (снизу слева) — арт-подложка с градиентом */
+[class*="fitInAccount"] { display: none !important; }
 
 /* ===== Коммерция: кнопка подарка в поле ввода ===== */
 button[aria-label="Give a Gift"],
