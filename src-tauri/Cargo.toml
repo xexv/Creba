@@ -1,10 +1,10 @@
 [package]
-name = "Dorion"
-version = "6.13.0"
-description = "Tiny alternative Discord client with a smaller footprint, themes and plugins, multi-profile, and more!"
-authors = ["SpikeHD"]
+name = "creba"
+version = "1.0.0"
+description = "Creba — оптимизированный лёгкий клиент Discord на Tauri (форк Dorion)"
+authors = ["xexv"]
 license = ""
-repository = ""
+repository = "https://github.com/xexv/Creba"
 edition = "2024"
 rust-version = "1.96"
 

@@ -44,6 +44,7 @@ section[class*="panels_"] > [class*="mask_"],
    а не borders_* (те тоже прячем на всякий случай). */
 [class*="profileFrameLayer"],
 [class*="staticPreview"],
+[class*="background_c4293b"],
 [class*="bordersTopLeft"],
 [class*="bordersTopRight"],
 [class*="bordersBottomLeft"],
