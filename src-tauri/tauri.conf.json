@@ -31,8 +31,7 @@
     "resources": [
       "injection/shelter.js",
       "icons/icon*.ico",
-      "extension/*",
-      "updater*"
+      "extension/*"
     ],
     "shortDescription": "",
     "linux": {
@@ -44,9 +43,9 @@
       }
     }
   },
-  "productName": "Dorion",
-  "version": "6.13.0",
-  "identifier": "com.spikehd.dorion",
+  "productName": "Creba",
+  "version": "1.0.0",
+  "identifier": "com.xexv.creba",
   "plugins": {
     "deep-link": {
       "desktop": {

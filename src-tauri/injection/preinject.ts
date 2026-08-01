@@ -133,7 +133,7 @@ async function init() {
   )
 
   updateOverlay({
-    subtitle: `Made with ❤️ by SpikeHD - v${version}`,
+    subtitle: `Creba - v${version}`,
     midtitle: 'Localizing JS imports...'
   })
 
