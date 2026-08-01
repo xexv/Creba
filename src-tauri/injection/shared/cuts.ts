@@ -39,6 +39,11 @@ section[class*="panels_"] > [class*="mask_"],
 [class*="clanTag"],
 [class*="collectible"] { display: none !important; }
 
+/* Nameplate: скрываем ТОЛЬКО арт-подложку строки участника, а не саму строку.
+   Строка = .childContainer.nameplated > [container_* (арт) + memberInner_* (участник)].
+   Прячем арт-слой (container_), участник (memberInner_) остаётся видимым. */
+[class*="nameplated"] > [class*="container_"] { display: none !important; }
+
 /* ===== Коммерция: кнопка подарка в поле ввода ===== */
 button[aria-label="Give a Gift"],
 button[aria-label="Подарить"],
