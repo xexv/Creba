@@ -10,7 +10,7 @@ export async function proxyFetch() {
   window.fetch = async (url, options) => {
     const { http } = window.__TAURI__
     const discordReg = /https?:\/\/(?:[a-z]+\.)?(?:discord\.com|discordapp\.com)(?:\/.*)?/g
-    const scienceReg = /\/api\/v\d+\/(science|track|metrics|premium-marketing)|sentry\.io|\/error-reporting/i
+    const scienceReg = /\/api\/v\d+\/(science|track|metrics|premium-marketing|quests)|sentry\.io|\/error-reporting/i
 
     // If it matches, just let it go through native OR its a relative URL
     if (extensionInjected || url.toString().match(discordReg) || url.toString().startsWith('ipc://') || url.toString().startsWith('/')) {
@@ -58,7 +58,7 @@ export function proxyXHR() {
 
   XMLHttpRequest.prototype.open = function(...args: unknown[]) {
     const [_method, url] = args
-    const rgx = /\/api\/v\d+\/(science|track|metrics|premium-marketing)|sentry\.io|\/error-reporting/i
+    const rgx = /\/api\/v\d+\/(science|track|metrics|premium-marketing|quests)|sentry\.io|\/error-reporting/i
 
     if (String(url).match(rgx)) {
       console.log(`[XHR Blocker] Blocked URL: ${url}`)

@@ -20,12 +20,24 @@ li:has(a[href="/quest-home"]) { display: none !important; }
 /* Корень свёрнутого/развёрнутого квест-бара — mask прямо в секции панелей аккаунта.
    Убирает и пустую полоску-контейнер, что остаётся при активном квесте. */
 section[class*="panels_"] > [class*="mask_"],
-[class*="questProgressWrapper"],
-[class*="questProgressCopy"],
-[class*="questProgressHint"],
-[class*="questRewardTile"],
-[class*="questAcceptedContent"],
-[class*="questAcceptedHeader"] { display: none !important; }
+[class*="questProgress"],
+[class*="questReward"],
+[class*="questAccepted"],
+[class*="questsButton"],
+[class*="questsContainer"],
+[class*="questBar"],
+[class*="questCard"],
+[class*="questTile"],
+[class*="questBadge"],
+[class*="questEmbed"],
+[class*="questHome"],
+[class*="questContent"],
+[class*="questFooter"],
+[class*="questHeader"],
+[class*="questNotif"],
+[class*="questPopout"],
+[class*="questIcon"],
+[class*="postEnrollment"] { display: none !important; }
 
 /* ===== Косметика: декорации аватаров / эффекты и баннеры профиля / кланы =====
    ВНИМАНИЕ: НЕ скрывать [class*="nameplate"] — у строк участников с nameplate
