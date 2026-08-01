@@ -39,7 +39,11 @@ section[class*="panels_"] > [class*="mask_"],
 [class*="clanTag"],
 [class*="collectible"] { display: none !important; }
 
-/* Profile frame (новая «рамка» вокруг карточки профиля) — углы рамки */
+/* Profile frame (новая «рамка» вокруг карточки профиля).
+   Реальный видимый фрейм — слой-картинка profileFrameLayer (из collectibles-shop),
+   а не borders_* (те тоже прячем на всякий случай). */
+[class*="profileFrameLayer"],
+[class*="staticPreview"],
 [class*="bordersTopLeft"],
 [class*="bordersTopRight"],
 [class*="bordersBottomLeft"],
@@ -50,8 +54,10 @@ section[class*="panels_"] > [class*="mask_"],
 /* Nameplate: скрываем ТОЛЬКО арт-подложку строки участника, а не саму строку.
    Строка = .childContainer.nameplated > [container_* (арт) + memberInner_* (участник)].
    Прячем арт-слой (container_), участник (memberInner_) остаётся видимым. */
-[class*="nameplated"] > [class*="container_"] { display: none !important; }
-
+[class*="nameplated"] > [class*="container_"],
+/* Арт-контейнер nameplate во ВСЕХ контекстах (список, hover-попап, DM, панель
+   аккаунта) — это отдельный слой container_df39b2 с video внутри, а не строка. */
+[class*="container_df39b2"],
 /* Nameplate на панели своего аккаунта (снизу слева) — арт-подложка с градиентом */
 [class*="fitInAccount"] { display: none !important; }
 

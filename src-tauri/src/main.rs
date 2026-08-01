@@ -348,16 +348,6 @@ fn main() {
         .zoom_hotkeys_enabled(true)
         .browser_extensions_enabled(true);
 
-      // Creba: авто-выбор источника экрана, чтобы не показывался нативный
-      // пикер WebView2 (скрин1). Захватывается весь экран без диалога.
-      // (Первая строка — дефолтные аргументы Tauri, их нельзя терять.)
-      #[cfg(target_os = "windows")]
-      {
-        win = win.additional_browser_args(
-          "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection --auto-select-desktop-capture-source=Screen",
-        );
-      }
-
       if !args::is_safemode() {
         // Preinject is bundled with "use strict" so we put it in it's own function to prevent potential client mod issues
         win = win.initialization_script(format!("console.log(window.location);if(window.__DORION_INIT__) {{throw new Error('Dorion already began initializing');}} window.__DORION_INIT__ = true; {preinject};{client_mods}").as_str());
