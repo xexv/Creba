@@ -88,5 +88,35 @@ export function applyCrebaCuts() {
   style.textContent = CREBA_CUTS_CSS
   document.head.appendChild(style)
 
+  hideWishlistTab()
+
   console.log('[Creba] UI cuts applied')
+}
+
+/**
+ * Скрыть вкладку «Wishlist» в карточке профиля. У неё нет семантического
+ * класса (только хеши), поэтому ищем по тексту. Debounced MutationObserver,
+ * т.к. вкладки появляются только при открытии профиля.
+ */
+function hideWishlistTab() {
+  const NEEDLE = /^(wishlist|список желаемого)$/i
+  const hide = () => {
+    document.querySelectorAll('[class*="tabBarItem"]').forEach((el) => {
+      if (NEEDLE.test((el.textContent || '').trim())) {
+        (el as HTMLElement).style.setProperty('display', 'none', 'important')
+      }
+    })
+  }
+  hide()
+
+  let scheduled = false
+  const obs = new MutationObserver(() => {
+    if (scheduled) return
+    scheduled = true
+    requestAnimationFrame(() => {
+      scheduled = false
+      hide()
+    })
+  })
+  obs.observe(document.body, { childList: true, subtree: true })
 }
