@@ -23,29 +23,33 @@ Creba загружает веб-клиент Discord в системный WebVi
 
 ## Что вырезано
 
-Creba удаляет/блокирует по умолчанию:
+Creba удаляет/скрывает/блокирует по умолчанию:
 
-* **Коммерция:** Nitro-плашки и апселлы, Shop, подарки/гифты, boost-UI.
-* **Косметика:** аватарные декорации, profile effects, nameplates, анимированные баннеры.
-* **Балласт-фичи:** Quests, Activities/встроенные игры, Server Discovery, game detection, connections, Clyde/AI, Family Center.
-* **Тяжёлый контент:** автоплей гифок/видео/аватаров, лишние ассеты пикеров.
-* **Фон/приватность:** телеметрия, `science`/`track`, Sentry-отчёты, промо-попапы.
+* **Коммерция:** Nitro-плашки и апселлы, Shop, кнопка подарка, boost-UI, промо-попапы, What's New.
+* **Квесты — полностью:** вкладка, квест-бар (и пустой контейнер), плитки наград, попапы **+ блок API квестов** (`/api/v*/quests`) — данные вообще не грузятся, ни вкладки, ни функционала.
+* **Косметика:** аватарные декорации, profile effects, баннеры профиля, **рамка профиля** (profile frame), **nameplate** (арт-подложка — при этом сами участники в списке остаются видны), clan-теги.
+* **Профиль:** секции **Wishlist** и **Game Collection**.
+* **Балласт-фичи:** GIF-пикер (Tenor), Apps/Activities, Soundboard, Server Discovery.
+* **Производительность:** анимации/переходы почти отключены (разгрузка GPU на idle).
+* **Фон/приватность (сеть):** телеметрия `science`/`track`/`metrics`, Sentry-отчёты, ассеты косметики — режутся через declarativeNetRequest (`extension/dnr-rules.json`).
 
-> Часть пунктов вырезается «по-настоящему» (блок сетевых запросов и патч рендера — не грузит), часть скрывается через CSS. Подробности — в исходниках патча инъекции.
+> Реально «не грузит» — сетевые блокировки (телеметрия, квест-API, ассеты) и патчи; остальное скрывается CSS/JS. Селекторы Discord захешированы, поэтому при апдейтах Discord часть вырезаний может потребовать подстройки. Правки — в `src-tauri/injection/shared/cuts.ts` и `src-tauri/extension/dnr-rules.json`.
 
 ## Платформы
 
-Собирается под **Windows, macOS, Linux** (x86_64 и ARM64). Основная и наиболее стабильная — Windows.
+Готовые сборки в [releases](https://github.com/xexv/Creba/releases): **Windows x64/ARM64**, **macOS (Apple Silicon)**, **Linux x64** (`.deb`/`.rpm`/`.AppImage`). Установщик ~5–7 МБ. Основная и наиболее стабильная платформа — Windows.
 
 | Возможность | Windows | macOS | Linux |
 |---|---|---|---|
 | Базовое (вход, навигация, текст/DM) | ✓ | ✓ | ~ |
 | Голос | ✓ | ✓ | ✗[^1] |
-| Демонстрация экрана | ~[^2] | ~ | ✗[^1] |
+| Демонстрация экрана | ✓[^2] | ~ | ✗[^1] |
 | Темы / Shelter / плагины | ✓ | ✓ | ✓ |
 
 [^1]: Голос/стрим на Linux зависят от WebRTC в WebKitGTK и в большинстве сборок не работают полноценно.
-[^2]: Захват экрана в WebView2 использует системный пикер; кастомный пикер «как в Discord» — в разработке.
+[^2]: Демонстрация экрана использует нативный пикер WebView2 (есть выбор окна/экрана). Плавающая плашка-индикатор «…is sharing your screen» скрывается через WinAPI (`functionality/screenshare.rs`).
+
+> Linux ARM и macOS Intel не собираются (нестабильная упаковка AppImage на ARM; Apple Silicon dmg покрывает современные Маки).
 
 ## Сборка
 
@@ -78,16 +82,16 @@ pnpm tauri build
 
 ## Релизы
 
-Релизы собираются через GitHub Actions: вкладка **Actions → Release Creba → Run workflow**, ввести версию и патчноуты — workflow соберёт Creba под все платформы/архитектуры и опубликует GitHub Release.
+Релизы собираются через GitHub Actions: вкладка **Actions → Release Creba → Run workflow**, ввести версию и патчноуты — workflow соберёт Creba (Windows x64/ARM, macOS Apple Silicon, Linux x64) и создаст **черновик** GitHub Release с этими сборками и патчноутами. Проверяешь черновик и жмёшь **Publish**.
 
 ## Плагины и темы
 
-Creba поставляется с Shelter; Vencord включается в настройках. Файлы кладутся в папку конфига:
+Creba поставляется с Shelter; Vencord включается в настройках. Файлы кладутся в папку конфига (папка данных унаследована от Dorion — `dorion`):
 
 ```
-Windows: %appdata%\creba\{plugins,themes,extensions}\
-Linux:   ~/.config/creba/{plugins,themes}\
-macOS:   ~/Library/Application Support/creba/{plugins,themes}\
+Windows: %appdata%\dorion\{plugins,themes,extensions}\
+Linux:   ~/.config/dorion/{plugins,themes}\
+macOS:   ~/Library/Application Support/dorion/{plugins,themes}\
 ```
 
 ## Благодарности
